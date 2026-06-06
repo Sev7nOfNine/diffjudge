@@ -1,5 +1,10 @@
 # diffjudge
 
+[![PyPI](https://img.shields.io/pypi/v/diffjudge.svg)](https://pypi.org/project/diffjudge/)
+[![CI](https://github.com/Sev7nOfNine/diffjudge/actions/workflows/ci.yml/badge.svg)](https://github.com/Sev7nOfNine/diffjudge/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Python](https://img.shields.io/pypi/pyversions/diffjudge.svg)](https://pypi.org/project/diffjudge/)
+
 **AI-powered pull request reviewer — with zero dependencies.**
 
 `diffjudge` fetches a pull request's diff, asks a language model to review it, and
