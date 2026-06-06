@@ -1,0 +1,50 @@
+name: "diffjudge"
+description: "AI-powered pull request reviewer that posts a review comment."
+branding:
+  icon: "check-circle"
+  color: "purple"
+
+inputs:
+  api-key:
+    description: "API key for the OpenAI-compatible provider."
+    required: true
+  model:
+    description: "Model name to use for the review."
+    required: false
+    default: "gpt-4o-mini"
+  base-url:
+    description: "OpenAI-compatible base URL."
+    required: false
+    default: "https://api.openai.com/v1"
+  github-token:
+    description: "Token used to fetch the diff and post the review comment."
+    required: false
+    default: ${{ github.token }}
+  max-diff-bytes:
+    description: "Truncate diffs larger than this many bytes."
+    required: false
+    default: "60000"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.x"
+    - name: Install diffjudge
+      shell: bash
+      run: pip install diffjudge
+    - name: Review pull request
+      shell: bash
+      env:
+        OPENAI_API_KEY: ${{ inputs.api-key }}
+        OPENAI_BASE_URL: ${{ inputs.base-url }}
+        GITHUB_TOKEN: ${{ inputs.github-token }}
+      run: >
+        diffjudge
+        --repo "${{ github.repository }}"
+        --pr "${{ github.event.pull_request.number }}"
+        --model "${{ inputs.model }}"
+        --max-diff-bytes "${{ inputs.max-diff-bytes }}"
+        --post

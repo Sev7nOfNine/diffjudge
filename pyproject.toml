@@ -1,0 +1,53 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "diffjudge"
+version = "0.1.0"
+description = "AI-powered pull request reviewer. Reviews diffs with any OpenAI-compatible model and posts the review. Zero dependencies."
+readme = "README.md"
+requires-python = ">=3.8"
+license = { text = "MIT" }
+authors = [{ name = "Seven Of Nine" }]
+keywords = [
+    "code-review",
+    "pull-request",
+    "github",
+    "github-action",
+    "llm",
+    "ai",
+    "openai",
+    "maintainer",
+    "automation",
+    "cli",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: Software Development :: Quality Assurance",
+    "Topic :: Software Development :: Version Control :: Git",
+    "Topic :: Utilities",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=7"]
+
+[project.urls]
+Homepage = "https://github.com/Sev7nOfNine/diffjudge"
+Repository = "https://github.com/Sev7nOfNine/diffjudge"
+Issues = "https://github.com/Sev7nOfNine/diffjudge/issues"
+
+[project.scripts]
+diffjudge = "diffjudge.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/diffjudge"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src/diffjudge", "README.md", "LICENSE", "CHANGELOG.md", "tests", "action.yml"]
